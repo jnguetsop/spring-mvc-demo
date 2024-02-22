@@ -1,18 +1,22 @@
 package com.jnguetsop.spring.mvc.demo;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationContext;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = SpringMvcDemoApplication.class)
-@WebAppConfiguration
-public class SpringMvcDemoApplicationTests {
+import static org.assertj.core.api.Assertions.assertThat;
 
-	@Test
-	public void contextLoads() {
-	}
+@SpringBootTest
+class SpringMvcDemoApplicationTests {
+
+    @Autowired
+    private ApplicationContext applicationContext;
+
+    @Test
+    void contextLoads() {
+        var beansCount = applicationContext.getBeanDefinitionCount();
+        assertThat(beansCount).isPositive();
+    }
 
 }
